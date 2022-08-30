@@ -10,6 +10,7 @@ A linux based software that recognizes digital images, reconnects them to form t
     make
   ```
   This command compiles and outputs an executable called UI_Code.exe
+  
 3) Run the executable: 
   ```
 ./UI_Code
