@@ -4,8 +4,8 @@
 #include <float.h>
 #include <math.h>
 #include <time.h>
-#include "SDL/SDL.h"
-#include "SDL/SDL_image.h"
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
 #include "pixeloperations.h"
 #include "err.h"
 #include "Network.h"
@@ -282,7 +282,7 @@ training_set* image_set1(double** targets)
     sprintf(number_str, "%d", i);
     strcat(filename, number_str);
     strcat(filename, "char.bmp");
-    set[i].img = load_image(filename);
+    set[i].img = get_image(filename);
     set[i].target = targets[i];
     
   }
@@ -301,7 +301,7 @@ SDL_Surface** _Prediction_Set()
     sprintf(number_str, "%d", i);
     strcat(filename, number_str);
     strcat(filename, "char.bmp");
-    validation[i] = load_image(filename);
+    validation[i] = get_image(filename);
   }
   return validation;
   

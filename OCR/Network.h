@@ -1,8 +1,8 @@
 #ifndef _NETWORK_H_
 #define _NETWORK_H_
 
-#include "SDL/SDL.h"
-#include "SDL/SDL_image.h"
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
 #include "Layer.h"
 struct Network
 {

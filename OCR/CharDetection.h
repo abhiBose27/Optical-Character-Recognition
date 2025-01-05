@@ -1,8 +1,8 @@
 #ifndef CHAR_DETECTION_
 #define CHAR_DETECTION_
 
-#include<stdlib.h>
-#include"SDL/SDL.h"
+#include <stdlib.h>
+#include "SDL2/SDL.h"
 
 //void DrawHorLine(int i);
 //void DrawVerLine(int x, int start, int end);

@@ -1,9 +1,9 @@
-#include"SDL/SDL.h"
-#include"SDL/SDL_image.h"
-#include<stdio.h>
-#include<stdlib.h>
-#include<stdbool.h>
-#include<err.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <err.h>
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
 #include "pixeloperations.h"
 #include "CharDetection.h"
 

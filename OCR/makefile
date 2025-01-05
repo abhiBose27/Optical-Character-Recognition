@@ -1,14 +1,13 @@
 #Start
 
 CC=gcc
-#CPPFLAGS= 'pkg-config --cflags sdl --cflags gtk+-3.0' -MMD -Wall -O3
-CFLAGS= `pkg-config --cflags sdl --cflags gtk+-3.0` -MMD -Wall -O3
-LDLIBS= `pkg-config --libs sdl --libs gtk+-3.0` -lSDL_image -lm -lSDL
+CFLAGS= `pkg-config --cflags sdl2 --cflags gtk+-3.0` -MMD -Wall -O3
+LDLIBS= `pkg-config --libs sdl2 --libs gtk+-3.0` -lSDL2_image -lm -lSDL2
 all: UI_code
 
-UI_code: CropImage.o CharDetection.o BlackAndWhite.o pixeloperations.o GaussianBlur.o Network.o Layer.o Neuron.o sdl_libs.o deskew.o
+UI_code: Resize.o CharDetection.o BlackAndWhite.o pixeloperations.o GaussianBlur.o Network.o Layer.o Neuron.o sdl_libs.o deskew.o
 
-CropImage.o: CropImage.h pixeloperations.h
+Resize.o: Resize.h pixeloperations.h
 
 CharDetection.o: pixeloperations.h CharDetection.h
 
@@ -32,5 +31,6 @@ clean:
 	${RM} *.o
 	${RM} *.d
 	${RM} UI_code
+	${RM} Result
 
 #END

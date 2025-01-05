@@ -1,9 +1,9 @@
 #ifndef _SDL_LIBS_
 #define _SDL_LIBS
-#include"SDL/SDL.h"
-#include"SDL/SDL_image.h"
-SDL_Surface* load_image(char* path);
-void init_SDL();
-SDL_Surface* displayImage(SDL_Surface *img);
-void wait_for_keypressed();
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
+
+SDL_Surface* get_image(char* path);
+int init_SDL();
+void display_image(SDL_Surface* image, int duration);
 #endif

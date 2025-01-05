@@ -1,8 +1,8 @@
 #include <err.h>
-#include "SDL/SDL.h"
-#include "SDL/SDL_image.h"
 #include <stdlib.h>
-#include<stdbool.h>
+#include <stdbool.h>
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
 #include "pixeloperations.h"
 #include "GaussianBlur.h"
 
@@ -97,7 +97,7 @@ void convolute(SDL_Surface* image_surface, double m[], size_t cols){
     
 }
 
-void Convolution(SDL_Surface *img)
+void convolution(SDL_Surface *img)
 {
    // SDL_Surface* s;
     convolute(img, gauss, 3);

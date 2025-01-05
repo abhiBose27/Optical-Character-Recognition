@@ -1,50 +1,36 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include"SDL/SDL.h"
-#include "SDL/SDL_image.h"
 #include <math.h>
-#include"pixeloperations.h"
-#include"deskew.h"
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
+#include "pixeloperations.h"
+#include "deskew.h"
 
 
-SDL_Surface *man_deskew(SDL_Surface* Surface,double Angle){
+SDL_Surface* man_deskew(SDL_Surface* image, double angle){
+    SDL_Surface* _ret = SDL_CreateRGBSurface(image->flags, image->w, image->h, image->format->BitsPerPixel,
+        image->format->Rmask, image->format->Gmask, image->format->Bmask, image->format->Amask);
 
-	/*SDL_Surface* rotatedimage= rotozoomSurface(image_surface, degree,1.0,0);
-	return rotatedimage;*/
-
-    SDL_Surface* _ret = SDL_CreateRGBSurface(Surface->flags, Surface->w, Surface->h, Surface->format->BitsPerPixel,
-        Surface->format->Rmask, Surface->format->Gmask, Surface->format->Bmask, Surface->format->Amask);
-
-	double CX = Surface->w / 2, CY = Surface->h / 2; //Center coordinates of image, or close enough.
+	double CX = image->w / 2, CY = image->h / 2; //Center coordinates of image, or close enough.
 	double X, Y, X2, Y2;
+	double radians = (angle * 3.14) / 100;
 
-	for(int y = 0; y < Surface->h; y++) {
-        for(int x= 0; x < Surface->w; x++) {
+	for(int y = 0; y < image->h; y++) {
+        for(int x= 0; x < image->w; x++) {
 			X = x - CX;
 			Y = y - CY;
-			X2 = (X * cos(Angle) - Y * sin(Angle));
-			Y2 = (X * sin(Angle) + Y * cos(Angle));
+			X2 = (X * cos(radians) - Y * sin(radians));
+			Y2 = (X * sin(radians) + Y * cos(radians));
 			X2 += CX;
 			Y2 += CY;
-			if( X2 >= Surface->w || X2 < 0 || Y2 >= Surface->h || Y2 < 0) put_pixel(_ret, x, y, SDL_MapRGB(Surface->format, 255, 255, 255));
-/*
-			X = x - CX;
-			Y = y - CY;
-			X2 = (X * cos(Angle) + Y * sin(Angle));
-			Y2 = (-X * sin(Angle) + Y * cos(Angle));
-			X2 += CX;
-			Y2 += CY;
-			if( X2 >= 0 && X2 < Surface->w && Y2 >= 0 && Y2 < Surface->h) put_pixel(_ret, (Uint32)X2, (Uint32)Y2, get_pixel(Surface, x, y));*/
-			else put_pixel(_ret,x,y,get_pixel(Surface,X2,Y2));
+			if( X2 >= image->w || X2 < 0 || Y2 >= image->h || Y2 < 0) 
+				put_pixel(_ret, x, y, SDL_MapRGB(image->format, 255, 255, 255));
+			else 
+				put_pixel(_ret, x, y, get_pixel(image, X2, Y2));
 		}
 	}
-
 	return _ret;
 }
-
-
-
-
 
 double variance(size_t arr[],size_t n)
 {
