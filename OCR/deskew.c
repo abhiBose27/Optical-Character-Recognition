@@ -7,13 +7,13 @@
 #include "deskew.h"
 
 
-SDL_Surface* man_deskew(SDL_Surface* image, double angle){
+SDL_Surface* man_deskew(SDL_Surface* image, float angle){
     SDL_Surface* _ret = SDL_CreateRGBSurface(image->flags, image->w, image->h, image->format->BitsPerPixel,
         image->format->Rmask, image->format->Gmask, image->format->Bmask, image->format->Amask);
 
-	double CX = image->w / 2, CY = image->h / 2; //Center coordinates of image, or close enough.
-	double X, Y, X2, Y2;
-	double radians = (angle * 3.14) / 100;
+	float CX = image->w / 2, CY = image->h / 2;
+	float X, Y, X2, Y2;
+	float radians = (angle * 3.14) / 100;
 
 	for(int y = 0; y < image->h; y++) {
         for(int x= 0; x < image->w; x++) {
@@ -32,71 +32,54 @@ SDL_Surface* man_deskew(SDL_Surface* image, double angle){
 	return _ret;
 }
 
-double variance(size_t arr[],size_t n)
-{
-
-	int sum = 0;
-	int sum1 = 0;
+float get_variance(size_t arr[], size_t n){
+	float sum = 0.0, sum_eq = 0.0;
 	for (size_t i = 0; i < n; i++)
-    {
-        sum = sum + arr[i];
-    }
-    double average = sum / (double)n;
+        sum += arr[i];
 
     for (size_t i = 0; i < n; i++)
-    {
-        sum1 = sum1 + pow((arr[i] - average), 2);
-    }
+        sum_eq += pow((arr[i] - sum / (float)n), 2);
 
-    return (sum1 / (double)n);
+    return sum_eq / (float)n;
 }
 
-void init_hist (size_t arr[],size_t n){
-
-for(size_t i = 0; i<n;i++)
-{
-	arr[i] = 0;
+void init_hist(size_t arr[], size_t n){
+	for(size_t i = 0; i<n;i++)
+		arr[i] = 0;
 }
 
-}
-double skew_deg(SDL_Surface* image, float precision){
-	size_t h = image->h;
-	size_t w = image->w;
-	size_t hist[h];
-	size_t sum;
-	Uint8 r,g,b;
-	double max_var = 0;
-	double max_var_deg=0;
-	double var;
-	double max = 45.;
-	double min = -45.;
+float skew_deg(SDL_Surface* image, float precision){
 	Uint32 pixel;
-	for(; min<max; min+= precision){
-		SDL_Surface *tilted_copy = man_deskew(image,min);
-		for (size_t i=0; i<h;i++){
+	size_t sum;
+	size_t height = image->h, width = image->w;
+	size_t hist[height];
+	Uint8 r,g,b;
+	float max_variance = 0, max_variance_deg = 0, variance;
+	float max = 45., min = -45.;
+	for(; min<max; min += precision){
+		SDL_Surface* tilted_copy = man_deskew(image, min);
+		for (size_t y = 0; y < height; y++){
 			sum = 0;
-				for(size_t j=0; j<w; j++){
-					pixel = get_pixel(tilted_copy,j,i);
-					SDL_GetRGB(pixel, tilted_copy->format, &r, &g, &b);
-					if (r== 0)
-						sum +=1;
-				}
-			hist[i]= sum;
+			for(size_t x = 0; x < width; x++){
+				pixel = get_pixel(tilted_copy, x, y);
+				SDL_GetRGB(pixel, tilted_copy->format, &r, &g, &b);
+				if (r== 0)
+					sum +=1;
+			}
+			hist[y]= sum;
 		}
-		var = variance(hist, h);
+		variance = get_variance(hist, height);
 		
-		if (var >max_var){
-			max_var = var;
-			max_var_deg = min;
+		if (variance > max_variance){
+			max_variance = variance;
+			max_variance_deg = min;
 		}
 		SDL_FreeSurface(tilted_copy);
-		init_hist(hist,h);
+		init_hist(hist, height);
 }
-	return max_var_deg;
+	return max_variance_deg;
 }
 
-SDL_Surface *auto_deskew(SDL_Surface* img)
-{
-return man_deskew(img, skew_deg(img,0.25));
-
+SDL_Surface* auto_deskew(SDL_Surface* image){
+	return man_deskew(image, skew_deg(image, 0.25));
 }

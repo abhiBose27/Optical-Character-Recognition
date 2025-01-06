@@ -55,6 +55,7 @@ void open_image(GtkButton* button, oi_widgets* widgets){
     gtk_file_filter_add_pattern(filter, "*.bmp");
     gtk_file_filter_add_pattern(filter, "*.png");
     gtk_file_filter_add_pattern(filter, "*.jpeg");
+    gtk_file_filter_add_pattern(filter, "*.jpg");
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), filter);
     gtk_widget_show_all(dialog);
     gint resp = gtk_dialog_run(GTK_DIALOG(dialog));
@@ -69,11 +70,11 @@ void open_image(GtkButton* button, oi_widgets* widgets){
 SDL_Surface* pre_processing(SDL_Surface* image){
     SDL_Surface* new_image;
     gray_scale(image);
-    contrast(image, 40);
-    //convolution(image);
-    binarization(image, 35);
-    new_image = resize(image, 10);
-    //new_image = auto_deskew(new_image);
+    contrast(image, 20);
+    binarization(image, 20);
+    new_image = auto_deskew(image);
+    new_image = resize(new_image, 10);
+    //convolution(new_image);
     return new_image;
 }
 
