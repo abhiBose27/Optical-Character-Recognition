@@ -261,8 +261,8 @@ SDL_Surface* pre_processing(SDL_Surface* image) {
     SDL_Surface* new_image;
     gray_scale(image);
     contrast(image, 10);
-    new_image = binarization(image, 10);
-    new_image = median_filter(new_image, 3);
+    new_image = median_filter(image, 3);
+    new_image = binarization(new_image, 10);
     new_image = auto_deskew(new_image);
     new_image = resize(new_image, 5);
     return new_image;
