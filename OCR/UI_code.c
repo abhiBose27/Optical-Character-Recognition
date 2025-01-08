@@ -5,19 +5,17 @@
 #include <string.h>
 #include <math.h>
 #include <ctype.h>
+#include "err.h"
 #include "gtk/gtk.h"
 #include "gtk/gtkx.h"
-#include "Network.h"
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
-#include "Resize.h"
-#include "CharDetection.h"
-#include "BlackAndWhite.h"
-#include "pixeloperations.h"
-#include "GaussianBlur.h"
-#include "deskew.h"
-#include "err.h"
 #include "sdl_libs.h"
+#include "Network.h"
+#include "CharDetection.h"
+#include "pixeloperations.h"
+#include "PreProcessing.h"
+
 
 char* file_name;
 GtkWidget* image_widget;
@@ -65,17 +63,6 @@ void open_image(GtkButton* button, oi_widgets* widgets){
         gtk_widget_set_sensitive(widgets->run_button, TRUE);
     }
     gtk_widget_destroy(dialog);
-}
-
-SDL_Surface* pre_processing(SDL_Surface* image){
-    SDL_Surface* new_image;
-    gray_scale(image);
-    contrast(image, 20);
-    binarization(image, 20);
-    new_image = auto_deskew(image);
-    new_image = resize(new_image, 10);
-    //convolution(new_image);
-    return new_image;
 }
 
 void run_image(GtkButton* button, ri_widgets* widgets){
