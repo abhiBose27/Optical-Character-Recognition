@@ -6,6 +6,7 @@
 typedef struct Result {
     char* string;
     size_t size;
+    size_t index;
 } Result;
 
 void text_reconstruction(SDL_Surface* image);

@@ -13,11 +13,12 @@
 //int i = 0;
 
 void add_character(Result* result, char character) {
-    if (strlen(result->string) == result->size) {
-        result->string = realloc(result->string, result->size + 256);
-        result->size += 256;
+    if (strlen(result->string) == result->size - 1) {
+        result->size *= 2;
+        result->string = realloc(result->string, result->size * sizeof(char));
     }
-    strcat(result->string, &character);
+    result->string[result->index] = character;
+    result->index += 1;
 }
 
 void extract_characters(Network* network, SDL_Surface* image, size_t x1, size_t x2, Result* result) {
@@ -26,7 +27,7 @@ void extract_characters(Network* network, SDL_Surface* image, size_t x1, size_t 
     SDL_Surface* fixed_aspect_ratio = fix_aspect_ratio(updated_character_image);
     SDL_Surface* compressed_image = compression(fixed_aspect_ratio, 28, 28);
     //char file_path[256];
-    //snprintf(file_path, sizeof(file_path), "./Training_images6/%dchar.bmp", i);
+    //snprintf(file_path, sizeof(file_path), "./Training_images7/%dchar.bmp", i);
     //save_image_to_bmp(compressed_image, file_path);
     // Run the characters through ML
     add_character(result, get_prediction(network, compressed_image));
@@ -95,6 +96,7 @@ void line_segmentation(SDL_Surface* image) {
     Network network = get_trained_network(3, 784, 52);
     Result result;
     result.size = 256;
+    result.index = 0;
     result.string = calloc(result.size, sizeof(char));
     size_t width = image->w, height = image->h;
     double* histogram = get_horizontal_pixel_intensity_histogram(image, 0.0, false, 0, width);
@@ -114,11 +116,11 @@ void line_segmentation(SDL_Surface* image) {
     
     file = fopen("Text", "w");
     fprintf(file, "%s", result.string);
-    fclose(file);
-
+    
     free(histogram);
     free(result.string);
     free_network(&network);
+    fclose(file);
 }
 
 void text_reconstruction(SDL_Surface* image) {
