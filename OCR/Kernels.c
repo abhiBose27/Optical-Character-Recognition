@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-float gauss[9] = {
+double gauss[9] = {
     1./16., 1./8., 1./16.,
     
     1./8., 1./4., 1./8.,
@@ -8,15 +8,15 @@ float gauss[9] = {
     1./16., 1./8., 1./16.
 };
 
-float sharpen[9] = {
-    0., -1., 0.,
+double sharpen[9] = {
+    1., -2., 1.,
     
-    -1., 5., -1.,
+    -2., 9., -2.,
     
-    0., -1., 0.
+    1., -2., 1.
 };
 
-float edge_detection[9] = {
+double edge_detection[9] = {
     0. -1., 0.,
     
     -1., 4., -1.,

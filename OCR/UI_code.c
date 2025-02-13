@@ -12,7 +12,8 @@
 #include "SDL2/SDL_image.h"
 #include "sdl_libs.h"
 #include "Network.h"
-#include "CharDetection.h"
+#include "TextDestruction.h"
+#include "TextReconstruction.h"
 #include "pixeloperations.h"
 #include "PreProcessing.h"
 
@@ -74,12 +75,12 @@ void run_image(GtkButton* button, ri_widgets* widgets){
         errx(1, "Cant get image from %s: %s", file_name, SDL_GetError());
 
     SDL_Surface* new_image = pre_processing(image);
+    text_destruction(new_image);
     display_image(new_image, 5000);
-    SDL_Surface** surfaces = DetectCharacter(new_image);
-    int nb_characters = NbCharacters();
-    text_conversion(surfaces, nb_characters);
+    text_reconstruction(new_image);
+    
     GtkWidget* dialog = gtk_message_dialog_new(GTK_WINDOW(widgets->window), GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_CLOSE,
-      "The text has been saved in the current directory. Named as: Result");
+      "The text has been saved in the current directory. Named as: Text");
     gtk_window_set_title(GTK_WINDOW(dialog), "Warning");
     gtk_dialog_run(GTK_DIALOG(dialog));
     gtk_widget_destroy(dialog);

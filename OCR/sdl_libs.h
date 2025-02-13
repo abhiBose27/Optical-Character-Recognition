@@ -1,9 +1,12 @@
-#ifndef _SDL_LIBS_
-#define _SDL_LIBS
+#ifndef SDL_LIBS_H
+#define SDL_LIBS_H
+
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 
-SDL_Surface* get_image(char* path);
 int init_SDL();
+SDL_Surface* get_image(char* path);
+SDL_Surface* convert_to_all_format(SDL_Surface* image);
 void display_image(SDL_Surface* image, int duration);
+void save_image_to_bmp(SDL_Surface* image, const char* path);
 #endif
