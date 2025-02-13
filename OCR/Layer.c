@@ -9,26 +9,27 @@
 #include "Layer.h"
 
 
-Layer GenerateLayer(double nb_neurons, double nb_inputs) 
-{
-  Layer l;
-  l.nb_outputs = nb_neurons;
-  l.neurons = calloc(nb_neurons, sizeof(Neuron));
-  Neuron* begin = l.neurons;
-  for (size_t i = 0 ; i < nb_neurons; i++)
-  {
-    begin[i] = GenerateNeuron(nb_inputs);
-  }
-  return l;
+// Generate a layer of neurons
+Layer generate_layer(size_t nb_neurons, size_t nb_inputs) {
+    Layer l;
+    l.nb_neurons = nb_neurons;
+    l.neurons = malloc(nb_neurons * sizeof(Neuron));
+    for (size_t i = 0 ; i < nb_neurons; i++) {
+        l.neurons[i] = generate_neuron(nb_inputs);
+    }
+    return l;
 }
 
-double* ProcessLayer(double *input, Layer *l)
-{
-	l -> output = calloc(l -> nb_outputs, sizeof(double));
-	double *begin = l -> output;
-	for (size_t i = 0 ; i < l -> nb_outputs; i++)
-	{
-		begin[i] = ProcessNeuron(input, &(l -> neurons[i]));
-	}	
-	return l -> output;
+void process_layer(double* inputs, Layer* layer) {
+    for (size_t i = 0; i < layer->nb_neurons; i++) {
+        process_neuron(inputs, &(layer->neurons[i]));
+    }
+}
+
+double* get_layer_output(Layer* layer) {
+    double* output = malloc(layer->nb_neurons * sizeof(double));
+    for (size_t i = 0; i < layer->nb_neurons; i++) {
+        output[i] = get_neuron_output(&(layer->neurons[i]));
+    }
+    return output;
 }

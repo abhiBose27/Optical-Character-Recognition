@@ -1,24 +1,18 @@
-#ifndef _NEURON_
-#define _NEURON_
-struct Neuron
-{
-  double nb_weights;
-	double *weights;
+#ifndef NEURON_H
+#define NEURON_H
+typedef struct Neuron {
+  	size_t nb_weights;
+	double* weights;
 	double bias;
 	double output;
-  double dl_wrt_curr;
-};
-
-typedef struct Neuron Neuron;
-
-double sigmoid(double x);
-
-double sigmoid_derivative(double guess);
-
-double ProcessNeuron(double *inputs, Neuron *N);
+  	double dl_wrt_curr;
+} Neuron;
 
 double randomnum();
-
-Neuron GenerateNeuron(double nb_inputs);
+double sigmoid(double x);
+double sigmoid_derivative(double guess);
+double get_neuron_output(Neuron* neuron);
+void process_neuron(double* inputs, Neuron* neuron);
+Neuron generate_neuron(size_t nb_inputs);
 
 #endif
