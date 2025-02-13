@@ -28,7 +28,7 @@ Training_set prepare_training_dataset(size_t nb_sets, size_t data_per_set) {
     Training_set tr_set;
     tr_set.data = malloc(nb_sets * data_per_set * sizeof(Training_data));
     tr_set.nb_data = nb_sets * data_per_set;
-    size_t training_set_tags[] = {1, 2, 3, 4, 5, 6};
+    size_t training_set_tags[] = {1, 2, 3, 4, 5, 6, 7};
     for (size_t i = 0; i < nb_sets; i++) {
         for (size_t j = 0; j < data_per_set; j++) {
             char file_path[256];

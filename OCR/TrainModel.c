@@ -21,9 +21,9 @@ void train_model(Network* network, size_t nb_data) {
     double* targets;
     double* inputs;
     double* outputs;
-    Training_set tr_set = prepare_training_dataset(6, nb_data);
+    Training_set tr_set = prepare_training_dataset(7, nb_data);
     printf("Training done with %ld\n", tr_set.nb_data);
-    for (size_t epoch = 0; epoch < 500; epoch++) {
+    for (size_t epoch = 0; epoch < 1000; epoch++) {
         double cost = 0;
         shuffle_dataset(tr_set.data, tr_set.nb_data);
         for (size_t i = 0; i < tr_set.nb_data; i++) {
@@ -46,14 +46,14 @@ void train_model(Network* network, size_t nb_data) {
 }
 
 int main(int argc, char* argv[]) {
-    //srand (time(NULL));
+    srand (time(NULL));
     Network network = generate_network(3, 784, 52);   
-    //train_model(&network, 52);
-    //save_network(&network);
+    train_model(&network, 52);
+    save_network(&network);
     free_network(&network);
 
     
-    network = get_trained_network(3, 784, 52);
+    /* network = get_trained_network(3, 784, 52);
     SDL_Surface* image = get_image("./Training_images4/7char.bmp");
     double* inputs = get_image_to_pixel_intensity_matrix(image);
     double* outputs = feed_forward(&network, inputs);
@@ -63,6 +63,6 @@ int main(int argc, char* argv[]) {
     free(outputs);
     free(inputs);
     SDL_FreeSurface(image);
-    free_network(&network);
+    free_network(&network); */
     return 0;
 }
