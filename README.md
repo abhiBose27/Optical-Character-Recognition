@@ -8,7 +8,7 @@ A linux based software that recognizes digital images, reconnects them to form t
 2) Install SDL2 and gtk+3
 3) Go to the OCR directory, and type on the terminal
   ```
-    make
+     make
   ```
   This command compiles and outputs an executable called UI_Code.exe
   
