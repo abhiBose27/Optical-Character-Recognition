@@ -22,8 +22,8 @@ Network generate_network(size_t nb_layers, size_t nb_inputs, size_t nb_outputs) 
     double* neurons = malloc(nb_layers * sizeof(double));
     double* inputs = malloc(nb_layers * sizeof(double));
 
-    // neurons = {256, 256, 52}
-    // inputs = {784, 256, 256}
+    // neurons = {128, 128, 52}
+    // inputs = {784, 128, 128}
     for (size_t i = 0; i < nb_layers; i++) {
         neurons[i] = i == nb_layers - 1 ? nb_outputs : 128;
     }
@@ -52,65 +52,6 @@ double* feed_forward(Network* network, double* inputs) {
     }
     return layer_output;
 }
-
-//// BACK PROPAGATION //////////////
-/* void BackPropagation(Network* network, double* target, double* inputs)
-{
-  double error;
-  double dl_dw;
-  double dl_db;
-  Neuron* neuron;
-  Neuron* neuron1;
-
-  int k = 2;
-  while (k >= 0)
-  {
-    for (int i = 0; i < network.layers[k].nb_outputs; i++)
-    {
-      neuron = &network.layers[k].neurons[i];
-      for (int j = 0; j < neuron->nb_weights; j++)
-      {
-        // If iterating over last layer
-        if (k == 2)
-        {
-          error = -(target[i] - res[i]);
-          dl_dw = error * sigmoid_derivative(neuron->output) * network.layers[k - 1].neurons[j].output;
-          dl_db = error * sigmoid_derivative(neuron->output) * 1;
-          
-          neuron1 = &network.layers[k - 1].neurons[j];
-          neuron1->dl_wrt_curr += neuron->weights[j] * sigmoid_derivative(neuron->output)  * error;
-
-          neuron->weights[j] = neuron->weights[j] - 0.2 * dl_dw;
-          neuron->bias = neuron->bias - 0.2 * dl_db;
-        }
-        else if (k > 0)
-        {
-          dl_dw = neuron->dl_wrt_curr * sigmoid_derivative(neuron->output) * network.layers[k - 1].neurons[j].output;
-          dl_db = neuron->dl_wrt_curr * sigmoid_derivative(neuron->output) * 1;
-          
-          neuron1 = &network.layers[k-1].neurons[j];
-          neuron1->dl_wrt_curr += neuron->weights[j] * sigmoid_derivative(neuron->output) * neuron->dl_wrt_curr;
-
-          neuron->weights[j] = neuron->weights[j] - 0.2 * dl_dw;
-          neuron->bias = neuron->bias - 0.2 * dl_db;
-        }
-        else
-        {
-          dl_dw = neuron->dl_wrt_curr * sigmoid_derivative(neuron->output) * inputs[j];
-          dl_db = neuron->dl_wrt_curr * sigmoid_derivative(neuron->output) * 1;
-          
-          neuron->weights[j] = neuron->weights[j] - 0.2 * dl_dw;
-          neuron->bias = neuron->bias - 0.2 * dl_db;
-        }
-      }
-
-    }
-    k--;
-
-  }
-
-}
- */
 
 void back_propagation(Network* network, double* targets, double* inputs, double learning_rate) {
     double error, dE_dw, dE_db, derivative;

@@ -76,7 +76,7 @@ void run_image(GtkButton* button, ri_widgets* widgets){
 
     SDL_Surface* new_image = pre_processing(image);
     text_destruction(new_image);
-    display_image(new_image, 5000);
+    display_image(new_image, 2000);
     text_reconstruction(new_image);
 
     GtkWidget* dialog = gtk_message_dialog_new(GTK_WINDOW(widgets->window), GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_CLOSE,

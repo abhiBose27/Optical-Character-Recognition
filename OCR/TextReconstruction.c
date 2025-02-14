@@ -27,7 +27,7 @@ void extract_characters(Network* network, SDL_Surface* image, size_t x1, size_t 
     SDL_Surface* fixed_aspect_ratio = fix_aspect_ratio(updated_character_image);
     SDL_Surface* compressed_image = compression(fixed_aspect_ratio, 28, 28);
     //char file_path[256];
-    //snprintf(file_path, sizeof(file_path), "./Training_images7/%dchar.bmp", i);
+    //snprintf(file_path, sizeof(file_path), "./Training_sets/Training_set8/%dchar.bmp", i);
     //save_image_to_bmp(compressed_image, file_path);
     // Run the characters through ML
     add_character(result, get_prediction(network, compressed_image));
