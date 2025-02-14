@@ -21,19 +21,23 @@ void train_model(Network* network, size_t nb_data) {
     double* targets;
     double* inputs;
     double* outputs;
-    Training_set tr_set = prepare_training_dataset(7, nb_data);
+    double cost;
+    Training_set tr_set = prepare_training_dataset(nb_data);
     printf("Training done with %ld\n", tr_set.nb_data);
     for (size_t epoch = 0; epoch < 1000; epoch++) {
-        double cost = 0;
+        cost = 0;
         shuffle_dataset(tr_set.data, tr_set.nb_data);
         for (size_t i = 0; i < tr_set.nb_data; i++) {
+            if (!tr_set.data[i].image)
+                continue;
+            
             targets = get_targets(tr_set.data[i].target, nb_data);
             inputs = get_image_to_pixel_intensity_matrix(tr_set.data[i].image);
             outputs = feed_forward(network, inputs);
-            for (size_t i = 0; i < 52; i++) {
+            for (size_t i = 0; i < nb_data; i++) {
                 cost += 0.5 * (targets[i] - outputs[i]) * (targets[i] - outputs[i]);
             }
-            back_propagation(network, targets, inputs, 0.1);
+            back_propagation(network, targets, inputs, 0.09);
             free(targets);
             free(inputs);
             free(outputs);
