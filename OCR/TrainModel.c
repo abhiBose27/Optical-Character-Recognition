@@ -17,12 +17,20 @@ double* get_targets(size_t x, size_t nb_outputs) {
     return target;
 }
 
-void train_model(Network* network, size_t nb_data) {
+double get_cost(double* targets, double* outputs, size_t nb_targets) {
+    double cost = 0;
+    for (size_t i = 0; i < nb_targets; i++) {
+        cost += 0.5 * (targets[i] - outputs[i]) * (targets[i] - outputs[i]);
+    }
+    return cost;
+}
+
+void train_model(Network* network, size_t nb_targets) {
     double* targets;
     double* inputs;
     double* outputs;
     double cost;
-    Training_set tr_set = prepare_training_dataset(nb_data);
+    Training_set tr_set = prepare_training_dataset(nb_targets);
     printf("Training done with %ld\n", tr_set.nb_data);
     for (size_t epoch = 0; epoch < 1000; epoch++) {
         cost = 0;
@@ -31,12 +39,10 @@ void train_model(Network* network, size_t nb_data) {
             if (!tr_set.data[i].image)
                 continue;
             
-            targets = get_targets(tr_set.data[i].target, nb_data);
+            targets = get_targets(tr_set.data[i].target, nb_targets);
             inputs = get_image_to_pixel_intensity_matrix(tr_set.data[i].image);
             outputs = feed_forward(network, inputs);
-            for (size_t i = 0; i < nb_data; i++) {
-                cost += 0.5 * (targets[i] - outputs[i]) * (targets[i] - outputs[i]);
-            }
+            cost += get_cost(targets, outputs, nb_targets);
             back_propagation(network, targets, inputs, 0.09);
             free(targets);
             free(inputs);
