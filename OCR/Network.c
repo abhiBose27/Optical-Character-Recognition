@@ -91,6 +91,11 @@ void save_network(Network* network) {
         curr_layer = &network->layers[i];
         char file_path[256];
         snprintf(file_path, sizeof(file_path), "./Model_data/%ld_layer_%ld_data", network->nb_layers, i);
+        
+        // Delete the previous data
+        file = fopen(file_path, "w");
+        fclose(file);
+        
         file = fopen(file_path, "a");
         for (size_t j = 0; j < curr_layer->nb_neurons; j++) {
             neuron = &curr_layer->neurons[j];
