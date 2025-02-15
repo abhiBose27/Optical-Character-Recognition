@@ -7,12 +7,12 @@
 #include "sdl_libs.h"
 
 
-void shuffle_dataset(Training_data* list, size_t nb_data) {
+void shuffle_dataset(Image_data* list, size_t nb_data) {
     if (nb_data <= 1)
         return;
     for (size_t i = nb_data - 1; i > 0; i--) {
         size_t j = rand() % (i + 1);
-        Training_data tmp = list[i];
+        Image_data tmp = list[i];
         list[i] = list[j];
         list[j] = tmp;
     }
@@ -71,8 +71,8 @@ char** get_training_sets(const char* entry_path, const char* pattern, size_t* nb
     return matches;
 }
 
-Training_data prepare_training_data(char* path, size_t target) {
-    Training_data tr_data;
+Image_data prepare_training_data(char* path, size_t target) {
+    Image_data tr_data;
     tr_data.image = get_image(path);
     tr_data.target = target;
     return tr_data;
@@ -90,7 +90,7 @@ Training_set prepare_training_dataset(size_t data_per_set) {
     if (!training_sets)
         errx(1, "No training images");
     
-    tr_set.data = malloc(nb_sets * data_per_set * sizeof(Training_data));
+    tr_set.data = malloc(nb_sets * data_per_set * sizeof(Image_data));
     tr_set.nb_data = nb_sets * data_per_set;
     for (size_t i = 0; i < nb_sets; i++) {
         for (size_t j = 0; j < data_per_set; j++) {
