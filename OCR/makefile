@@ -35,6 +35,5 @@ clean:
 	${RM} UI_code
 	${RM} Result
 	${RM} TrainModel
-	${RM} Text
 
 #END

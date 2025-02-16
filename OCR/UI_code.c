@@ -76,15 +76,15 @@ void run_image(GtkButton* button, ri_widgets* widgets){
 
     SDL_Surface* new_image = pre_processing(image);
     text_destruction(new_image);
-    display_image(new_image, 2000);
-    text_reconstruction(new_image);
+    //display_image(new_image, 2000);
+    char* text = text_reconstruction(new_image);
 
-    GtkWidget* dialog = gtk_message_dialog_new(GTK_WINDOW(widgets->window), GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_CLOSE,
-      "The text has been saved in the current directory. Named as: Text");
-    gtk_window_set_title(GTK_WINDOW(dialog), "Warning");
+    GtkWidget* dialog = gtk_message_dialog_new(GTK_WINDOW(widgets->window), GTK_DIALOG_MODAL, GTK_MESSAGE_OTHER, GTK_BUTTONS_CLOSE, "%s", text);
+    gtk_window_set_title(GTK_WINDOW(dialog), "Message");
     gtk_dialog_run(GTK_DIALOG(dialog));
     gtk_widget_destroy(dialog);
 
+    free(text);
     SDL_FreeSurface(image);
     SDL_FreeSurface(new_image);
     SDL_Quit();

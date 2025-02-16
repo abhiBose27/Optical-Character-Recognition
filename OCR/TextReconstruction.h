@@ -9,6 +9,6 @@ typedef struct Result {
     size_t index;
 } Result;
 
-void text_reconstruction(SDL_Surface* image);
+char* text_reconstruction(SDL_Surface* image);
 
 #endif

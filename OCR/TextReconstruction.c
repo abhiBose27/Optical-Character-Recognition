@@ -90,9 +90,8 @@ void word_segmentation(Network* network, SDL_Surface* image, size_t y1, size_t y
     SDL_FreeSurface(line_image);
 }
 
-void line_segmentation(SDL_Surface* image) {
+char* line_segmentation(SDL_Surface* image) {
     int y1 = -1;
-    FILE* file;
     Network network = get_trained_network(3, 784, 52);
     Result result;
     result.size = 256;
@@ -113,16 +112,12 @@ void line_segmentation(SDL_Surface* image) {
     }
     if (y1 != -1)
         word_segmentation(&network, image, y1, height, &result);
-    
-    file = fopen("Text", "w");
-    fprintf(file, "%s", result.string);
-    
+        
     free(histogram);
-    free(result.string);
     free_network(&network);
-    fclose(file);
+    return result.string;
 }
 
-void text_reconstruction(SDL_Surface* image) {
-    line_segmentation(image);
+char* text_reconstruction(SDL_Surface* image) {
+    return line_segmentation(image);
 }
