@@ -30,7 +30,7 @@ void extract_characters(Network* network, SDL_Surface* image, size_t x1, size_t 
     //snprintf(file_path, sizeof(file_path), "./Training_sets/Training_set8/%dchar.bmp", i);
     //save_image_to_bmp(compressed_image, file_path);
     // Run the characters through ML
-    add_character(result, get_prediction(network, compressed_image));
+    add_character(result, letters[get_prediction(network, compressed_image, 52)]);
     //display_image(compressed_image, 2000);
     //printf("%d\n", result);
     SDL_FreeSurface(updated_character_image);
