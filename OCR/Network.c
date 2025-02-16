@@ -14,7 +14,9 @@
 #include "sdl_libs.h"
 
 
-/////Generates 3 layered Network ///////////
+char letters[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+
 Network generate_network(size_t nb_layers, size_t nb_inputs, size_t nb_outputs) {
     Network network;
     network.nb_layers = nb_layers;
@@ -38,7 +40,6 @@ Network generate_network(size_t nb_layers, size_t nb_inputs, size_t nb_outputs) 
     return network;
 }
 
-//////// Feed Forward ///// Called after every epoch //////
 double* feed_forward(Network* network, double* inputs) {
     double* layer_output = NULL;
     for(size_t i = 0; i < network->nb_layers; i++) {
@@ -140,14 +141,12 @@ Network get_trained_network(size_t nb_layer, size_t nb_inputs, size_t nb_outputs
     return network;
 }
 
-char get_prediction(Network* network, SDL_Surface* image) {
-    char letters[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+size_t get_prediction(Network* network, SDL_Surface* image, size_t nb_targets) {
     double* inputs = get_image_to_pixel_intensity_matrix(image);
     double* outputs = feed_forward(network, inputs);
     size_t index = 0;
     double result = outputs[index];
-    for (size_t i = 1; i < 52; i++) {
+    for (size_t i = 1; i < nb_targets; i++) {
         if (outputs[i] > result) {
             result = outputs[i];
             index = i;
@@ -155,7 +154,7 @@ char get_prediction(Network* network, SDL_Surface* image) {
     }
     free(inputs);
     free(outputs);
-    return letters[index];
+    return index;
 }  
 
 void free_network(Network* network) {
