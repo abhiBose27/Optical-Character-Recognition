@@ -1,20 +1,11 @@
-#include <stdlib.h>
-#include <sys/types.h>
-#include <signal.h>
-#include <unistd.h>
-#include <string.h>
-#include <math.h>
-#include <ctype.h>
 #include "err.h"
 #include "gtk/gtk.h"
 #include "gtk/gtkx.h"
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "sdl_libs.h"
-#include "Network.h"
 #include "TextDestruction.h"
 #include "TextReconstruction.h"
-#include "pixeloperations.h"
 #include "PreProcessing.h"
 
 
@@ -76,7 +67,6 @@ void run_image(GtkButton* button, ri_widgets* widgets){
 
     SDL_Surface* new_image = pre_processing(image);
     text_destruction(new_image);
-    //display_image(new_image, 2000);
     char* text = text_reconstruction(new_image);
 
     GtkWidget* dialog = gtk_message_dialog_new(GTK_WINDOW(widgets->window), GTK_DIALOG_MODAL, GTK_MESSAGE_OTHER, GTK_BUTTONS_CLOSE, "%s", text);
