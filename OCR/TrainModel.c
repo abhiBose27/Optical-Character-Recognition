@@ -72,14 +72,14 @@ void test_network(Network* network, size_t nb_targets) {
 }
 
 int main(int argc, char* argv[]) {
-    //srand (time(NULL));
-    //Network network = generate_network(3, 784, 52);   
-    //train_model(&network, 52);
-    //save_network(&network);
-    //free_network(&network);
+    srand (time(NULL));
+    Network network = generate_network(3, 784, 52);   
+    train_model(&network, 52);
+    save_network(&network);
+    free_network(&network);
 
     
-    Network network = get_trained_network(3, 784, 52);
+    network = get_trained_network(3, 784, 52);
     test_network(&network, 52);
     free_network(&network);
     return 0;
