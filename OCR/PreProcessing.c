@@ -40,7 +40,7 @@ double get_normalised_intensity(double intensity, double normalised_factor) {
     return (normalised_factor * intensity - 128) + 128;
 }
 
-float gaussian(float x, float sigma) {
+double gaussian(double x, double sigma) {
     return exp(-(x * x) / (2 * sigma * sigma));
 }
 
@@ -317,7 +317,7 @@ SDL_Surface* fix_aspect_ratio(SDL_Surface* image) {
 SDL_Surface* bilateral_filter(SDL_Surface* image, int radius) {
     int ny, nx;
     double current_intensity, neighbour_intensity, new_intensity;
-    float sum, weight_sum, spatial_weight, range_weight, weight;
+    double sum, weight_sum, spatial_weight, range_weight, weight;
     size_t width = image->w, height = image->h;
     SDL_Surface* new_image = SDL_CreateRGBSurface(image->flags, width, height, image->format->BitsPerPixel,
         image->format->Rmask, image->format->Gmask, image->format->Bmask, image->format->Amask);
