@@ -32,7 +32,7 @@ void train_model(Network* network, size_t nb_targets) {
     double cost;
     Training_set tr_set = prepare_training_dataset(nb_targets);
     printf("Training done with %ld\n", tr_set.nb_data);
-    for (size_t epoch = 0; epoch < 2000; epoch++) {
+    for (size_t epoch = 0; epoch < 2500; epoch++) {
         cost = 0;
         shuffle_dataset(tr_set.data, tr_set.nb_data);
         for (size_t i = 0; i < tr_set.nb_data; i++) {
@@ -43,7 +43,7 @@ void train_model(Network* network, size_t nb_targets) {
             inputs = get_image_to_pixel_intensity_matrix(tr_set.data[i].image);
             outputs = feed_forward(network, inputs);
             cost += get_cost(targets, outputs, nb_targets);
-            back_propagation(network, targets, inputs, 0.05);
+            back_propagation(network, targets, inputs, 0.04);
             free(targets);
             free(inputs);
             free(outputs);
