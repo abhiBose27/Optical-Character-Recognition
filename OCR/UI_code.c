@@ -1,8 +1,6 @@
 #include "err.h"
 #include "gtk/gtk.h"
 #include "gtk/gtkx.h"
-#include "SDL2/SDL.h"
-#include "SDL2/SDL_image.h"
 #include "sdl_libs.h"
 #include "TextDestruction.h"
 #include "TextReconstruction.h"

@@ -1,5 +1,3 @@
-#include <stdbool.h>
-#include <err.h>
 #include "pixeloperations.h"
 
 static inline

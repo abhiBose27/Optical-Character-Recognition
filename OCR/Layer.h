@@ -6,8 +6,6 @@
 typedef struct Layer{
 	Neuron* neurons;
 	size_t nb_neurons;
-	//double *output;
-  	//double nb_outputs;
 } Layer;
 
 Layer generate_layer(size_t nb_neurons, size_t nb_inputs);

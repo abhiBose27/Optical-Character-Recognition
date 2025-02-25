@@ -2,7 +2,6 @@
 #define DATASET_H
 
 #include "SDL2/SDL.h"
-#include "SDL2/SDL_image.h"
 
 typedef struct Image_data {
     SDL_Surface* image;

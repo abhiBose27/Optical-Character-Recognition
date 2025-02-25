@@ -1,9 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <err.h>
-#include "SDL2/SDL.h"
+#include "err.h"
 #include "SDL2/SDL_image.h"
+#include "sdl_libs.h"
 
 
 SDL_Surface* get_image(char* path){

@@ -56,6 +56,7 @@ void train_model(Network* network, size_t nb_targets) {
 }
 
 void test_network(Network* network, size_t nb_targets) {
+    double* inputs;
     size_t prediction;
     size_t nb_correct = 0;
     Training_set tr_set = prepare_training_dataset(52);
@@ -63,9 +64,11 @@ void test_network(Network* network, size_t nb_targets) {
     for (size_t i = 0; i < tr_set.nb_data; i++) {
         if (!tr_set.data[i].image)
             continue;
-        prediction = get_prediction(network, tr_set.data[i].image, nb_targets);
+        inputs = get_image_to_pixel_intensity_matrix(tr_set.data[i].image);
+        prediction = get_prediction(network, inputs, nb_targets);
         if (prediction == tr_set.data[i].target)
             nb_correct += 1;
+        free(inputs);
     }
     printf("Accuracy: %f\n", (double) nb_correct * 100 / tr_set.nb_data);
     free_dataset(&tr_set);
@@ -82,5 +85,5 @@ int main(int argc, char* argv[]) {
     network = get_trained_network(3, 784, 52);
     test_network(&network, 52);
     free_network(&network);
-    return 0;
+    return EXIT_SUCCESS;
 }

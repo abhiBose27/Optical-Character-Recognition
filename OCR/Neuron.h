@@ -1,5 +1,6 @@
 #ifndef NEURON_H
 #define NEURON_H
+
 typedef struct Neuron {
   	size_t nb_weights;
 	double* weights;

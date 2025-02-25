@@ -1,11 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <limits.h>
-#include <float.h>
-#include <math.h>
-#include <time.h>
-#include "SDL2/SDL.h"
-#include "SDL2/SDL_image.h"
 #include "pixeloperations.h"
 #include "err.h"
 #include "Network.h"
@@ -141,8 +133,7 @@ Network get_trained_network(size_t nb_layer, size_t nb_inputs, size_t nb_outputs
     return network;
 }
 
-size_t get_prediction(Network* network, SDL_Surface* image, size_t nb_targets) {
-    double* inputs = get_image_to_pixel_intensity_matrix(image);
+size_t get_prediction(Network* network, double* inputs, size_t nb_targets) {
     double* outputs = feed_forward(network, inputs);
     size_t index = 0;
     double result = outputs[index];
@@ -152,7 +143,6 @@ size_t get_prediction(Network* network, SDL_Surface* image, size_t nb_targets) {
             index = i;
         }
     }
-    free(inputs);
     free(outputs);
     return index;
 }  

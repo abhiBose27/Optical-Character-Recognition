@@ -1,9 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <err.h>
-#include "SDL2/SDL.h"
-#include "SDL2/SDL_image.h"
 #include "sdl_libs.h"
 #include "pixeloperations.h"
 #include "TextReconstruction.h"
@@ -26,17 +20,19 @@ void extract_characters(Network* network, SDL_Surface* image, size_t x1, size_t 
     SDL_Surface* updated_character_image = remove_white_edges(character_image);
     SDL_Surface* fixed_aspect_ratio = fix_aspect_ratio(updated_character_image);
     SDL_Surface* compressed_image = compression(fixed_aspect_ratio, 28, 28);
+    double* inputs = get_image_to_pixel_intensity_matrix(compressed_image);
     //char file_path[256];
     //snprintf(file_path, sizeof(file_path), "./Training_sets/Training_set8/%dchar.bmp", i);
     //save_image_to_bmp(compressed_image, file_path);
     // Run the characters through ML
-    add_character(result, letters[get_prediction(network, compressed_image, 52)]);
+    add_character(result, letters[get_prediction(network, inputs, 52)]);
     //display_image(compressed_image, 2000);
     //printf("%d\n", result);
     SDL_FreeSurface(updated_character_image);
     SDL_FreeSurface(character_image);
     SDL_FreeSurface(compressed_image);
     SDL_FreeSurface(fixed_aspect_ratio);
+    free(inputs);
     //i++;
 }
 

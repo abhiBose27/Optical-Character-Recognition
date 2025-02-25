@@ -1,10 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <err.h>
-#include <math.h>
-#include "SDL2/SDL.h"
-#include "SDL2/SDL_image.h"
+#include "err.h"
 #include "pixeloperations.h"
 #include "PreProcessing.h"
 #include "Kernels.h"

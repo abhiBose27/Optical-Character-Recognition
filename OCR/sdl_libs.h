@@ -2,7 +2,6 @@
 #define SDL_LIBS_H
 
 #include "SDL2/SDL.h"
-#include "SDL2/SDL_image.h"
 
 int init_SDL();
 SDL_Surface* get_image(char* path);
