@@ -9,6 +9,8 @@ UI_code: pixeloperations.o Network.o Layer.o Neuron.o sdl_libs.o Kernels.o PrePr
 
 TrainModel: pixeloperations.o Network.o Layer.o Neuron.o sdl_libs.o Dataset.o
 
+TestPreProcessing: pixeloperations.o sdl_libs.o PreProcessing.o
+
 TextDestruction.o: TextDestruction.h
 
 TextReconstruction.o: TextReconstruction.h
@@ -35,5 +37,6 @@ clean:
 	${RM} UI_code
 	${RM} Result
 	${RM} TrainModel
+	${RM} TestPreProcessing
 
 #END
