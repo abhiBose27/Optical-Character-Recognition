@@ -1,3 +1,6 @@
 .vscode
 *.o
 *.d
+TestPreProcessing
+TrainModel
+UI_code
