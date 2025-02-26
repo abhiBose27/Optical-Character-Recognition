@@ -1,9 +1,9 @@
-#include "pixeloperations.h"
+#include "PixelOperations.h"
 #include "err.h"
 #include "Network.h"
 #include "Neuron.h"
 #include "Layer.h"
-#include "sdl_libs.h"
+#include "SdlLibs.h"
 
 
 char letters[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',

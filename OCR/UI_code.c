@@ -1,7 +1,7 @@
 #include "err.h"
 #include "gtk/gtk.h"
 #include "gtk/gtkx.h"
-#include "sdl_libs.h"
+#include "SdlLibs.h"
 #include "TextDestruction.h"
 #include "TextReconstruction.h"
 #include "PreProcessing.h"

@@ -5,17 +5,17 @@ CFLAGS= `pkg-config --cflags sdl2 --cflags gtk+-3.0` -MMD -Wall -O3
 LDLIBS= `pkg-config --libs sdl2 --libs gtk+-3.0` -lSDL2_image -lm -lSDL2
 all: UI_code
 
-UI_code: pixeloperations.o Network.o Layer.o Neuron.o sdl_libs.o Kernels.o PreProcessing.o TextReconstruction.o TextDestruction.o
+UI_code: PixelOperations.o Network.o Layer.o Neuron.o SdlLibs.o Kernels.o PreProcessing.o TextReconstruction.o TextDestruction.o
 
-TrainModel: pixeloperations.o Network.o Layer.o Neuron.o sdl_libs.o Dataset.o
+TrainModel: PixelOperations.o Network.o Layer.o Neuron.o SdlLibs.o Dataset.o
 
-TestPreProcessing: pixeloperations.o sdl_libs.o PreProcessing.o
+TestPreProcessing: PixelOperations.o SdlLibs.o PreProcessing.o
 
 TextDestruction.o: TextDestruction.h
 
 TextReconstruction.o: TextReconstruction.h
 
-pixeloperations.o: pixeloperations.h
+PixelOperations.o: PixelOperations.h
 
 Network.o: Network.h
 
@@ -29,7 +29,7 @@ Kernels.o: Kernels.h
 
 PreProcessing.o: PreProcessing.h
 
-sdl_libs.o: sdl_libs.h
+SdlLibs.o: SdlLibs.h
 
 clean:
 	${RM} *.o

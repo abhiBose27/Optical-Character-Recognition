@@ -1,7 +1,7 @@
 #include <time.h>
 #include "Network.h"
-#include "pixeloperations.h"
-#include "sdl_libs.h"
+#include "PixelOperations.h"
+#include "SdlLibs.h"
 #include "PreProcessing.h"
 #include "Dataset.h"
 

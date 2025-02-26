@@ -4,7 +4,7 @@
 #include <err.h>
 #include "Dataset.h"
 #include "PreProcessing.h"
-#include "sdl_libs.h"
+#include "SdlLibs.h"
 
 
 void shuffle_dataset(Image_data* list, size_t nb_data) {

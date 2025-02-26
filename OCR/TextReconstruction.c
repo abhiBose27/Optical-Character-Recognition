@@ -1,5 +1,5 @@
-#include "sdl_libs.h"
-#include "pixeloperations.h"
+#include "SdlLibs.h"
+#include "PixelOperations.h"
 #include "TextReconstruction.h"
 #include "PreProcessing.h"
 #include "Network.h"

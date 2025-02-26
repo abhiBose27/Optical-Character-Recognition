@@ -1,6 +1,6 @@
 #include "err.h"
-#include "sdl_libs.h"
-#include "pixeloperations.h"
+#include "SdlLibs.h"
+#include "PixelOperations.h"
 #include "TextDestruction.h"
 #include "PreProcessing.h"
 

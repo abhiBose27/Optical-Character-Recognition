@@ -1,8 +1,8 @@
 #include "err.h"
-#include "pixeloperations.h"
+#include "PixelOperations.h"
 #include "PreProcessing.h"
 #include "Kernels.h"
-#include "sdl_libs.h"
+#include "SdlLibs.h"
 
 
 double get_adaptive_threshold(SDL_Surface* image, size_t x, size_t y, int blocksize) {
