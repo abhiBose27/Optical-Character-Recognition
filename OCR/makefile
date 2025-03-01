@@ -9,7 +9,7 @@ UI_code: PixelOperations.o Network.o Layer.o Neuron.o SdlLibs.o Kernels.o PrePro
 
 TrainModel: PixelOperations.o Network.o Layer.o Neuron.o SdlLibs.o Dataset.o
 
-TestPreProcessing: PixelOperations.o SdlLibs.o PreProcessing.o
+TestPreProcessing: PixelOperations.o SdlLibs.o PreProcessing.o TextDestruction.o
 
 TextDestruction.o: TextDestruction.h
 

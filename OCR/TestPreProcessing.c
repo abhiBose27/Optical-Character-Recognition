@@ -1,6 +1,7 @@
 #include <err.h>
 #include "SdlLibs.h"
 #include "PreProcessing.h"
+#include "TextDestruction.h"
 
 
 int main(int argc, char* argv[]) {
@@ -12,6 +13,7 @@ int main(int argc, char* argv[]) {
     if (!image)
         errx(1, "Cant get image from %s: %s", argv[1], SDL_GetError());
     SDL_Surface* new_image = pre_processing(image);
+    text_destruction(new_image);
     display_image(new_image, 5000);
     SDL_FreeSurface(image);
     SDL_FreeSurface(new_image);
